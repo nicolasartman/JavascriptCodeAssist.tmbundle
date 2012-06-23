@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -wKU
+require ENV['TM_SUPPORT_PATH'] + '/lib/ui'
+require ENV['TM_SUPPORT_PATH'] + '/lib/osx/plist'
+require "rubygems"
+require "json"
+
+autocompleteScriptPath = "\"" + ENV['TM_BUNDLE_SUPPORT'] + "/autocompletions.js\""
+test = JSON.parse(`node #{autocompleteScriptPath} #{ENV['TM_FILENAME']}`)
+
+node_api_calls = OSX::PropertyList.load(File.read(ENV['TM_BUNDLE_SUPPORT'] + '/functions.plist'))
+
+local_funs = [{ "insert" =&gt; "(${1:arg1}, ${2:arg2})", "display" =&gt;  "test_1function"} , {"insert" =&gt; "test2_function($1)", "display" =&gt; "test2_function"}]
+TextMate::UI.complete(test, :initial_filter =&gt; ENV['TM_CURRENT_WORD'], :extra_chars =&gt; '_')</string>
+	<key>fallbackInput</key>
+	<string>document</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>~</string>
+	<key>name</key>
+	<string>Autocomplete from Word</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.js</string>
+	<key>uuid</key>
+	<string>15F2A81A-08A4-457C-B9E3-CA8327D4B882</string>
+</dict>
+</plist>
