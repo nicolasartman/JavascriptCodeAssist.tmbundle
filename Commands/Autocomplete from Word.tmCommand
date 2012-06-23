@@ -12,12 +12,9 @@ require "rubygems"
 require "json"
 
 autocompleteScriptPath = "\"" + ENV['TM_BUNDLE_SUPPORT'] + "/autocompletions.js\""
-test = JSON.parse(`node #{autocompleteScriptPath} #{ENV['TM_FILENAME']}`)
+function_completions = JSON.parse(`node #{autocompleteScriptPath} #{ENV['TM_FILENAME']}`)
 
-node_api_calls = OSX::PropertyList.load(File.read(ENV['TM_BUNDLE_SUPPORT'] + '/functions.plist'))
-
-local_funs = [{ "insert" =&gt; "(${1:arg1}, ${2:arg2})", "display" =&gt;  "test_1function"} , {"insert" =&gt; "test2_function($1)", "display" =&gt; "test2_function"}]
-TextMate::UI.complete(test, :initial_filter =&gt; ENV['TM_CURRENT_WORD'], :extra_chars =&gt; '_')</string>
+TextMate::UI.complete(function_completions, :initial_filter =&gt; ENV['TM_CURRENT_WORD'], :extra_chars =&gt; '_')</string>
 	<key>fallbackInput</key>
 	<string>document</string>
 	<key>input</key>
@@ -25,7 +22,7 @@ TextMate::UI.complete(test, :initial_filter =&gt; ENV['TM_CURRENT_WORD'], :extra
 	<key>keyEquivalent</key>
 	<string>~</string>
 	<key>name</key>
-	<string>Autocomplete from Word</string>
+	<string>Function Completions for Word</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>
