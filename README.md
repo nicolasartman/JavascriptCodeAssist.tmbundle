@@ -1,5 +1,7 @@
-JavaScript Code Assist
-======================
+JavaScript Code Assist (Deprecated)
+===================================
+
+_This is deprecated, as it was just a fun little hack project and there are much better, widely supported tools that supercede its functionality._
 
 This bundle's goal is to add basic code assist, similar to what webstorm/eclipse/etc have in terms of more sophisticated completions beyond simple word-based autocomplete.
 
